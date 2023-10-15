@@ -66,22 +66,42 @@ fornecerá todas as demais rotas possíveis.
   
   - Acima, um resultado de uma API que implementa HATEOAS, em cada resposta existe uma collection de links.
 
+## Controller
+Um Controller é um recurso que disponibiliza funcionalidades de negócio da aplicação através do protocolo HTTP,
+conforme exemplo visto abaixo:
 
+```
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
 
+@RestController
+public class WelcomeController {
+    @GetMapping("/welcome")
+    public String welcome(){
+        return "Welcome to a Spring Boot REST API";
+    }
+}
+```
 
+### Rest Controller
+Um Rest Controller em Spring nada mais é que uma classe contendo anotações específicas para disponibilizar
+recursos HTTP com base em nossos serviços e regras de negócio.
 
+Anotações e configurações mais comuns:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- @RestController
+  - Responsável por designar o bean de compoment, que suporta requisições HTTP com base na arquitetura REST.
+- @RequestMapping("prefix")
+  - Determina qual a URI comum para todos os recursos disponibilizados pelo Controller.
+- @GetMapping
+  - Determina que o método aceitará requisições HTTP do tipo GET.
+- @PostMapping
+  - Determina que o método aceitará requisições HTTP do tipo POST.
+- @PutMapping 
+  - Determina que o método aceitará requisições HTTP do tipo PUT.
+- @DeleteMapping
+  - Determina que o método aceitará requisições HTTP do tipo DELETE.
+- @RequestBody
+  - Converte um JSON para o tipo do objeto esperado como parâmetro no método.
+- @PathVariable 
+  - Consegue determinar que parte da URI será composta por parâmetros recebidos nas requisições.
