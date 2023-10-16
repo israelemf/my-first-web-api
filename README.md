@@ -113,3 +113,7 @@ O Swagger é uma linguagem de descrição de interface para descrever APIs RESTf
 
 É utilizado em conjunto com outras ferramentas de software de código aberto para projetar, construir, documentar e 
 usar serviços da Web RESTful
+
+Um exemplo da documentação do controller do projeto em questão utilizando Swagger:
+
+<img src="./img_readme/exemplo-swagger.png">
