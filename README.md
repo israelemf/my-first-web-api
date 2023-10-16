@@ -53,10 +53,12 @@ Existe um modelo de maturidade para esse tipo de API, proposto por Leonard Richa
 - Nível 1: Aplicação de Resources
   <img src="./img_readme/nivel1.webp">
   - Nesse nível, o nome dos recursos foram equalizados, e para não gerar ambiguidade é necessário definir o verbo apropriado.
+
 - Nível 2: Implementação de verbos HTTP
   <img src="./img_readme/nivel2.webp">
   - Como a definição dos verbos já são realizadas no Nível 1, o Nível 2 se encarrega de validar a aplicabilidade dos verbos
 para finalizadades específicas.
+
 - Nível 3: HATEOAS
   - Raramente implementada em API's, fornece em cada requisição, links que indicarão como poderá ser feita a navegação
 entre seus recursos. Ou seja, quem for consumir a API precisará saber apenas a rota principal e a resposta dessa requisição

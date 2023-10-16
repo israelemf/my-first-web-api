@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class WelcomeController {
     @GetMapping
     public String welcome() {
-        return "<h1>Welcome to My SpringBoot Web API</h1>";
+        return "<h1>Ti amo</h1>";
     }
 }
