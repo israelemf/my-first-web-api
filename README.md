@@ -117,3 +117,102 @@ usar serviços da Web RESTful
 Um exemplo da documentação do controller do projeto em questão utilizando Swagger:
 
 <img src="./img_readme/exemplo-swagger.png">
+
+
+## Exception Handlers
+
+O tratamento de exceção é o mecanismo responsável pelo tratamento da ocorrência de condições que alterar o fluxo normal
+da execução de um programa, com o retorno em forma de uma mensagem, informando qual foi a ocorrência e sua resolução.
+
+Existem alguns tipos de tratamentos de exceções em uma aplicação Spring Web.
+
+### Solução 1: Nível do Controller 
+Funciona no nível do @Controller, onde cada método trata uma exceção de forma declarativa com **@ExceptionHandler**
+
+```
+public class MeuController{
+    
+    //...
+    @ExceptionHandler({ MinhaException1.class})
+    public void meuMetodo() {
+        //
+    }
+}
+```
+
+Não é uma abordagem tão produtiva quando se trata de grandes projetos.
+
+### Solução 2: ResponseStatusExceptionResolver
+Conseguimos estipular exceções com base em mapeamentos de códigos de status HTTP, redirecionando para a exceção
+
+```
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class RecursoNotFoundException extends RuntimeException {
+    public RecursoNotFoundException() {
+        super();
+    }
+    public RecursoNotFoundException(String message) {
+        super(message);
+    }
+}
+```
+
+### RestController Advice
+
+O Spring 3.2 traz suporte para um **@ExceptionHandler** global com a anotação **@ControllerAdvice**
+
+Essa anotação @ControllerAdvice nos permite realizar múltiplos @ExceptionHandler, antes espalhados, em um único
+componente global de tratamento de erros.
+
+- Controle total sobre o corpo da resposta, bem como o código de status
+- Ele fornece o mapeamento de várias exceções ao mesmo método, para serem tratadas em conjunto
+- Ele faz bom uso da respota RESTful
+
+### Configurando um GlobalExceptionHandler
+
+Para isso, precisamos configurar um tratamento de exceções global, para que intercepte todas as exceções que podem
+ocorrer na aplicação, semp recisar tornar declarativo em todos os recursos.
+
+#### Customizando nossas mensagens
+Em uma resposta HTTP, mesmo sendo um erro, pode ser considerada um objeto que será convertido em JSON, expondo
+informações relacionadas a exceção disparada.
+
+```
+import java.util.Date;
+
+public class ResponseError {
+	private Date timestamp = new Date();
+	private String status = "error";
+	private int statusCode = 400;
+	private String error;
+	
+	//getters e setters
+}
+```
+
+#### Definindo uma exceção de negócio
+
+Algumas das exceções podem estar relacionadas ao domínio ou negócio da aplicação, e deve existir uma classes de exceção
+que estende RunTimeException, que vai servir como base para todas as nossas outras exceções de negócio.
+
+```
+public class BusinessException extends RuntimeException {
+	public BusinessException(String mensagem) {
+		super(mensagem);
+	}
+	public BusinessException(String mensagem, Object ... params) {
+		super(String.format(mensagem, params));
+	}
+}
+```
+
+#### Configurando o Exception Handler
+
+Vamos criar a classe que vai buscar todas as exceções de negócio BusinessException para tratar, converter e retornar
+mensagens mais declarativas ao usuário da aplicação
+
+Ai que entra o **GlobalExceptionHandler**, onde vai ficar agrupado todas as exceções que podem ocorrer na aplicação.
+
+
+
+
