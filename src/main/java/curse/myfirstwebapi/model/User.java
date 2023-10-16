@@ -3,7 +3,7 @@ package curse.myfirstwebapi.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="tb_user")
+@Table(name="tb_user", uniqueConstraints={@UniqueConstraint(columnNames={"username"})})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
