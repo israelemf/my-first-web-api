@@ -107,3 +107,9 @@ Anotações e configurações mais comuns:
   - Converte um JSON para o tipo do objeto esperado como parâmetro no método.
 - @PathVariable 
   - Consegue determinar que parte da URI será composta por parâmetros recebidos nas requisições.
+
+## Documentação de API com Swagger
+O Swagger é uma linguagem de descrição de interface para descrever APIs RESTful expressas utilizando JSON.
+
+É utilizado em conjunto com outras ferramentas de software de código aberto para projetar, construir, documentar e 
+usar serviços da Web RESTful
